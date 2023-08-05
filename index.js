@@ -37,6 +37,12 @@ async function run() {
             const result = await classesCollection.find().toArray();
             res.send(result);
         })
+        app.post('/classes', async (req, res) => {
+            const newClass = req.body;
+            console.log(newClass);
+            const result = await classesCollection.insertOne(newClass)
+            res.send(result);
+        })
 
         // instructor
         app.get('/instructors', async (req, res) => {
@@ -67,6 +73,7 @@ async function run() {
             console.log(newEnrol);
             const result = await enrolsCollection.insertOne(newEnrol);
             res.send(result);
+
         })
 
 
