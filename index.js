@@ -9,7 +9,6 @@ app.use(cors());
 app.use(express.json());
 
 
-
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.fphzptz.mongodb.net/?retryWrites=true&w=majority`;
 
@@ -36,11 +35,13 @@ async function run() {
             const result = await classesCollection.find().toArray();
             res.send(result);
         })
+
         app.post('/classes', async (req, res) => {
             const newClass = req.body;
             const result = await classesCollection.insertOne(newClass)
             res.send(result);
         })
+
 
         // instructor
         app.get('/instructors', async (req, res) => {
