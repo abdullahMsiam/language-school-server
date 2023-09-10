@@ -25,6 +25,7 @@ async function run() {
     try {
         // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
+        const personsCollection = client.db('summerDb').collection('persons');
         const classesCollection = client.db('summerDb').collection('classes');
         const instructorsCollection = client.db('summerDb').collection('instructors');
         const usersCollection = client.db('summerDb').collection('users');
@@ -42,7 +43,18 @@ async function run() {
             res.send(result);
         })
 
+        // persons manage 
+        app.get('/persons', async (req, res) => {
+            const result = await personsCollection.find().toArray();
+            res.send(result);
+        })
 
+        app.post('/persons', async (req, res) => {
+            const person = req.body;
+            const result = await personsCollection.insertOne(person);
+            res.send(result);
+            console.log(person);
+        })
         // instructor
         app.get('/instructors', async (req, res) => {
             const result = await instructorsCollection.find().toArray();
