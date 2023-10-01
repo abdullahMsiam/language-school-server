@@ -37,6 +37,12 @@ async function run() {
             const result = await blogsCollection.find().toArray();
             res.send(result);
         })
+
+        app.get('/blogs/:id', async (req, res) => {
+            const id = req.params.id;
+            const selectBlog = blogs.find(blog => blog._id === id);
+            res.send(selectBlog);
+        })
         // classes
         app.get('/classes', async (req, res) => {
             const result = await classesCollection.find().toArray();
