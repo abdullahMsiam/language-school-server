@@ -30,7 +30,13 @@ async function run() {
         const instructorsCollection = client.db('summerDb').collection('instructors');
         const usersCollection = client.db('summerDb').collection('users');
         const enrolsCollection = client.db('summerDb').collection('enrols');
+        const blogsCollection = client.db('summerDb').collection('Blogs');
 
+        // blogs 
+        app.get('/blogs', async (req, res) => {
+            const result = await blogsCollection.find().toArray();
+            res.send(result);
+        })
         // classes
         app.get('/classes', async (req, res) => {
             const result = await classesCollection.find().toArray();
